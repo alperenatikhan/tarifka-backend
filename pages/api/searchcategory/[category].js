@@ -1,7 +1,25 @@
 import axios from 'axios'
+import Cors from 'cors'
+
+
+const cors = Cors({
+  methods: ['POST', 'GET', 'HEAD'],
+})
+
+
+function runMiddleware(req,res,fn) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+
+      return resolve(result)
+    })
+  })
+}
 
 
 export default async function handler(req, res) {
+
+await runMiddleware(req,res,cors)
 
 let {category, pagenr} = req.query
 
