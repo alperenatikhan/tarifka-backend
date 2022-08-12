@@ -34,10 +34,19 @@ const nonEmptyOrNull = entries.filter(([key,val]) => val !== '' && val !== null)
 const output = Object.fromEntries(nonEmptyOrNull)
 
 let unFilteredIngredientEntries = Object.entries(output)
-let filteredIngredientEntries= unFilteredIngredientEntries.filter(([key,val]) => key.includes('strIngredient') || key.includes('strMeasure'))
-let filteredIngredientObject = Object.fromEntries(filteredIngredientEntries)
+let filteredIngredientsArray= unFilteredIngredientEntries.filter(([key,val]) => key.includes('strIngredient'))
+let filteredMeasuresArray = unFilteredIngredientEntries.filter(([key,val]) =>key.includes('strMeasure'))
 
-res.status(200).json({ "id":id, 'result':output, filteredIngredientObject })
+
+//let filteredIngredientObject = Object.fromEntries(filteredIngredientEntries)
+
+let resultString=[]
+for (let num=0;num < Math.floor(filteredIngredientsArray.length); num++ ){
+let ingredientMeasure = `${filteredMeasuresArray[num][1]} ${filteredIngredientsArray[num][1]}`
+resultString.push(ingredientMeasure)
+}
+
+res.status(200).json({ "id":id, 'result':output, ingredientString })
 }else{
 
 res.status(404).json({ msg:'not found in database' })
