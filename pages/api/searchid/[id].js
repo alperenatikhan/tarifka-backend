@@ -46,7 +46,7 @@ let ingredientMeasure = `${filteredMeasuresArray[num][1]} ${filteredIngredientsA
 resultString.push(ingredientMeasure)
 }
 
-res.status(200).json({ "id":id, 'result':output, ingredientString })
+res.status(200).json({ "id":id, 'result':output, "ingredientString":resultString })
 }else{
 
 res.status(404).json({ msg:'not found in database' })
