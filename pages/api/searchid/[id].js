@@ -11,7 +11,7 @@ const cors = Cors({
 function runMiddleware(req,res,fn) {
   return new Promise((resolve, reject) => {
     fn(req, res, (result) => {
-
+res.header('Access-Control-Allow-Origin', '*')
       return resolve(result)
     })
   })
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
 await runMiddleware(req,res,cors)
 
-res.header('Access-Control-Allow-Origin', '*')
+
 
 let {id}= req.query
 
