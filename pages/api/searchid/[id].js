@@ -11,7 +11,7 @@ const cors = Cors({
 function runMiddleware(req,res,fn) {
   return new Promise((resolve, reject) => {
     fn(req, res, (result) => {
-res.header('Access-Control-Allow-Origin', '*')
+
       return resolve(result)
     })
   })
