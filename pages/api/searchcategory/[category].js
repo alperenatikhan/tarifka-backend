@@ -21,6 +21,8 @@ export default async function handler(req, res) {
 
 await runMiddleware(req,res,cors)
 
+res.header('Access-Control-Allow-Origin', '*')
+
 let {category, pagenr} = req.query
 
 let dishes = await axios.get(`http://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`).then(item=> item.data).then(item=> item.meals)
